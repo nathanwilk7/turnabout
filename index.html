@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Patient Analytics</title>
+
+    <style>
+      * {
+      font-family: Arial, Helvetica, sans-serif;
+      }
+      ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      }
+      
+      li {
+      float: left;
+      }
+      
+      li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      }
+      
+      li a:hover {
+      background-color: #111;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#patient">Patients</a></li>
+      <li><a href="#analytics">Analytics</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    
+    <h1 style='text-align:center'>Sigmund Freud</h1>
+    
+    <h3>Diagnosis</h3>
+    <p>Sigmund Freud was an Austrian neurologist and the founder of psychoanalysis, a clinical method for treating psychopathology through dialogue between a patient and a psychoanalyst. Freud was born to Galician Jewish parents in the Moravian town of Freiberg, in the Austro-Hungarian Empire. He qualified as a doctor of medicine in 1881 at the University of Vienna. In 1938 Freud left Austria to escape the Nazis. He died in exile in the United Kingdom in 1939.
+      </p>
+    <h3>Goals</h3>
+    <p>Though in overall decline as a diagnostic and clinical practice, psychoanalysis remains influential within psychology, psychiatry, and psychotherapy, and across the humanities. As such, it continues to generate extensive and highly contested debate with regard to its therapeutic efficacy, its scientific status, and whether it advances or is detrimental to the feminist cause.
+      </p>
+    <h3>Plans</h3>
+    <p>Freud entered the University of Vienna at age 17. He had planned to study law, but joined the medical faculty at the university, where his studies included philosophy under Franz Brentano, physiology under Ernst Brücke, and zoology under Darwinist professor Carl Claus.
+      </p>
+    
+    <div style="float:left" id="behavioral_trend"></div>
+    <div style="float:left" id="behaviorometer"></dev>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawLineColors);
+
+      function drawLineColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Time');
+      data.addColumn('number', 'Positive');
+      data.addColumn('number', 'Negative');
+      
+      data.addRows([
+      [0, 0, 40],    [1, 10, 36],   [2, 23, 39],  [3, 17, 34],   [4, 18, 32],  [5, 9, 22],
+      [6, 11, 27],   [7, 27, 24],  [8, 33, 25],  [9, 40, 32],  [10, 32, 19], [11, 35, 3],
+      [12, 30, 5], [13, 40, 10], [14, 42, 9], [15, 47, 15], [16, 44, 5], [17, 48, 0]
+      ]);
+      
+      var options = {
+      hAxis: {
+      title: 'Days in Program'
+      },
+      vAxis: {
+      title: 'Behavior'
+      },
+      colors: ['#4274f4', '#d12714'],
+      'width': 600,
+      'height': 400,
+      'title': 'Behavioral Trend'
+      };
+      
+      var chart = new google.visualization.LineChart(document.getElementById('behavioral_trend'));
+      chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Type", "Number", { role: "style" } ],
+        ["Positive", 12, "#4274f4"],
+        ["Negative", 5, "#d12714"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Behavior-ometer",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("behaviorometer"));
+      chart.draw(view, options);
+  }
+  </script>
+  </body>
+</html>
